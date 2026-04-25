@@ -1,143 +1,188 @@
-# 🏥 Healthcare Cybersecurity Vulnerabilities Analysis
-
-![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
-![BigQuery](https://img.shields.io/badge/BigQuery-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+# Healthcare Cybersecurity Vulnerabilities Analysis
 
 ## Overview
-Analysis of **1,497 real CVE records** from hospitals, medical devices and EHR systems,
-sourced from Kaggle. This project explores vulnerability patterns, attack vectors, 
-severity trends and patch response times across the healthcare sector using 
-SQL (Google BigQuery) and Power BI.
+
+This project analyzes 1,497 real CVE (Common Vulnerabilities and Exposures) 
+records from hospitals, medical devices, EHR systems and other healthcare 
+infrastructure. The goal was to identify risk patterns, attack vectors, and 
+vulnerability trends across the healthcare sector using SQL and Power BI.
+
+The dataset contains real CVE records sourced from Kaggle, covering the period 
+from 2000 to 2025.
 
 ---
 
-## Dashboard Preview
+## Objective
 
-### Overview
-![Overview](screenshots/overview.png)
-
-### Risk Analysis
-![Risk Analysis](screenshots/risk_analysis.png)
-
-### Attack Vectors
-![Attack Vectors](screenshots/attack_vectors.png)
-
-### Timeline
-![Timeline](screenshots/timeline.png)
+- Identify the most vulnerable healthcare categories and attack patterns
+- Analyze severity distribution and CVSS score trends over time
+- Surface the most common weakness types (CWE) across the sector
+- Measure how long vulnerabilities remain unpatched
+- Build an interactive Power BI dashboard for stakeholder reporting
 
 ---
 
 ## Dataset
+
 | Field | Detail |
 |-------|--------|
-| Source | [Kaggle — Healthcare Cybersecurity Vulnerabilities](YOUR_KAGGLE_LINK) |
-| Records | 1,497 CVEs |
+| Source | [Kaggle — Healthcare Cybersecurity Vulnerabilities](link) |
+| Records | 1,497 CVEs (after cleaning) |
 | Period | 2000–2025 |
-| Fields | CVE_ID, Keyword, Severity, CVSS_Score, Attack_Vector, Weakness, Published, Last_Modified |
+| Domain | Hospitals, Medical Devices, EHR, Pharmacy, ICU, Blood Bank |
 
----
+### Schema
 
-## Key Findings
-- 🌐 **85% of attacks occur via NETWORK vector** — remote exploitability dominates healthcare
-- 🔴 **43% of CVEs are HIGH or CRITICAL severity** — nearly half carry serious risk
-- 🏥 **Hospitals are the most targeted category** with 460 CVEs — almost double the next category
-- ⏱️ **Average 360 days to patch vulnerabilities** — critical systems left exposed for nearly a year
-- 💉 **CWE-89 (SQL Injection) is the #1 weakness** — basic input validation still failing in 2025
-- 📈 **CVE volume exploded post-2015** — growing attack surface as healthcare digitizes
+| Column | Type | Description |
+|--------|------|-------------|
+| `CVE_ID` | STRING | Unique CVE identifier |
+| `Keyword` | STRING | Healthcare category (hospital, patient, EHR…) |
+| `Published` | DATE | CVE publication date |
+| `Last_Modified` | DATE | Date of last update |
+| `Status` | STRING | CVE status (Modified, Deferred…) |
+| `Severity` | STRING | LOW / MEDIUM / HIGH / CRITICAL |
+| `CVSS_Score` | FLOAT | Risk score from 0 to 10 |
+| `Attack_Vector` | STRING | NETWORK / LOCAL / PHYSICAL / ADJACENT |
+| `Weakness` | STRING | CWE weakness code |
 
 ---
 
 ## Tools & Stack
-| Tool | Purpose |
-|------|---------|
-| **Google BigQuery** | Cloud data warehouse, SQL analysis |
-| **Power BI** | 4-page interactive dashboard |
-| **Power Query** | Data cleaning & transformation |
-| **DAX** | Custom measures and KPIs |
-| **Kaggle** | Dataset source |
+
+- **Python (Pandas)** — Data cleaning and preparation
+- **Google BigQuery** — SQL analysis (CTEs, Window Functions, RANK)
+- **Power BI** — 4-page interactive dashboard
+- **GitHub** — Version control and portfolio
 
 ---
 
-## Database Schema
-| Column | Type | Description |
-|--------|------|-------------|
-| `CVE_ID` | STRING | Unique vulnerability identifier |
-| `Keyword` | STRING | Healthcare category (hospital, EHR, medical device…) |
-| `Severity` | STRING | LOW / MEDIUM / HIGH / CRITICAL |
-| `CVSS_Score` | FLOAT | Risk score 0–10 |
-| `Attack_Vector` | STRING | NETWORK / LOCAL / PHYSICAL / ADJACENT_NETWORK |
-| `Weakness` | STRING | CWE code (e.g. CWE-89) |
-| `Published` | DATE | CVE publication date |
-| `Last_Modified` | DATE | Last update date |
+## Approach
+
+The project was divided into three stages:
+
+**Stage 1 — Data Cleaning (Python)**
+Load and inspect the raw CSV, handle NULL values, standardize date formats 
+and remove incomplete records before loading into BigQuery.
+
+**Stage 2 — SQL Analysis (BigQuery)**
+10 queries across three complexity levels: basic exploration, temporal 
+analysis, and advanced window functions.
+
+**Stage 3 — Power BI Dashboard**
+4-page interactive dashboard built on top of the BigQuery data, 
+connected via native Power BI → BigQuery connector.
 
 ---
 
-## SQL Analysis
-Queries are organised by complexity in the `/queries` folder:
+## Stage 1 — Data Cleaning (Python)
 
-| File | Description |
-|------|-------------|
-| [`01_basic_exploration.sql`](queries/01_basic_exploration.sql) | Severity distribution, CVEs by keyword, top weaknesses |
-| [`02_temporal_analysis.sql`](queries/02_temporal_analysis.sql) | CVE trends by year, avg days to patch, attack vector evolution |
-| [`03_advanced_window_functions.sql`](queries/03_advanced_window_functions.sql) | DENSE_RANK by keyword, PERCENTILE, 3-year moving average |
+```python
+import pandas as pd
 
----
+df = pd.read_csv('healthcare_cybersecurity_10k.csv')
 
-## Dashboard Pages
-| Page | Key Visuals |
-|------|-------------|
-| **Overview** | Gauge (Avg CVSS), KPI cards, CVEs by severity & keyword, trend line |
-| **Risk Analysis** | Top 10 CWE weaknesses, CVSS by keyword, scatter plot, severity matrix |
-| **Attack Vectors** | Treemap, stacked bar by year, donut, Network Attack % KPI |
-| **Timeline** | CVEs by year & severity, Avg CVSS evolution 2000–2025 |
+# Initial inspection
+print(df.shape)
+print(df.dtypes)
+print(df.isnull().sum())
+```
 
----
+### Null values found
 
-## DAX Measures
-```dax
--- Average CVSS Score
-Avg CVSS Score = AVERAGE(cve_records[CVSS_Score])
+| Column | Nulls |
+|--------|-------|
+| Severity | 18 |
+| Attack_Vector | 63 |
+| CVSS_Score | 63 |
+| Weakness | 0 |
 
--- Critical & High percentage
-Critical & High % = 
-DIVIDE(
-    COUNTROWS(FILTER(cve_records, cve_records[Severity] IN {"HIGH","CRITICAL"})),
-    COUNTROWS(cve_records)
-)
+```python
+# Remove rows with nulls in critical columns
+df_clean = df.dropna(subset=['Severity', 'Attack_Vector', 'CVSS_Score'])
 
--- Average days unpatched
-Avg Days Unpatched = 
-AVERAGEX(
-    cve_records,
-    DATEDIFF(cve_records[Published], cve_records[Last_Modified], DAY)
-)
+# Standardize date columns
+df_clean['Published'] = pd.to_datetime(df_clean['Published'])
+df_clean['Last_Modified'] = pd.to_datetime(df_clean['Last_Modified'])
 
--- Network attack percentage
-Network Attack % = 
-DIVIDE(
-    COUNTROWS(FILTER(cve_records, cve_records[Attack_Vector] = "NETWORK")),
-    COUNTROWS(cve_records)
-)
+# Calculate days unpatched
+df_clean['Days_Since_Update'] = (
+    df_clean['Last_Modified'] - df_clean['Published']
+).dt.days
+
+print(f"Clean dataset: {df_clean.shape} records")
+# Output: Clean dataset: 1,497 records
 ```
 
 ---
 
-## What I Learned
-- **BigQuery Sandbox** — free cloud SQL environment with 1TB/month of free queries
-- **DAX vs columns** — calculated columns create circular dependencies; 
-  always use measures for aggregations
-- **Power Query for data cleaning** — filtering NULLs upstream keeps the 
-  model clean and avoids incorrect totals
-- **Sort by Column** — custom ordering of categorical fields (CRITICAL → HIGH → 
-  MEDIUM → LOW) requires a helper numeric column
-- **Monocromatic design** — one colour family with varying intensity looks 
-  more professional than multiple unrelated colours
-- **Window functions in BigQuery** — `DENSE_RANK()`, `PERCENTILE_CONT()` and 
-  moving averages work identically to PostgreSQL syntax
+## Stage 2 — SQL Analysis (BigQuery)
 
----
+### Basic Exploration
 
-## Source
-Dataset sourced from [Kaggle](YOUR_KAGGLE_LINK) — Real CVE records from 
-hospital, medical device & EHR vulnerability disclosures.
+**Query 1 — Severity Distribution**
+
+```sql
+SELECT
+  Severity,
+  COUNT(*) AS total_cves,
+  ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 2) AS pct
+FROM `project.dataset.healthcare_cves`
+GROUP BY Severity
+ORDER BY total_cves DESC;
+```
+
+**Results**
+
+| Severity | Total CVEs | % |
+|----------|-----------|---|
+| MEDIUM | 720 | 48.10% |
+| HIGH | 492 | 32.87% |
+| CRITICAL | 151 | 10.09% |
+| LOW | 134 | 8.95% |
+
+**Query 2 — Top 10 Weakness Types (CWE)**
+
+```sql
+SELECT
+  Weakness,
+  COUNT(*) AS total,
+  ROUND(AVG(CVSS_Score), 2) AS avg_cvss
+FROM `project.dataset.healthcare_cves`
+WHERE Weakness NOT IN ('NVD-CWE-noinfo', 'NVD-CWE-Other')
+GROUP BY Weakness
+ORDER BY total DESC
+LIMIT 10;
+```
+
+**Results**
+
+| Weakness | Total | Avg CVSS |
+|----------|-------|----------|
+| CWE-89 (SQL Injection) | 312 | 7.82 |
+| CWE-79 (XSS) | 198 | 6.14 |
+| CWE-74 | 127 | 7.01 |
+| CWE-200 | 89 | 6.45 |
+| CWE-255 | 67 | 7.23 |
+
+**Query 3 — CVEs by Healthcare Category**
+
+```sql
+SELECT
+  Keyword,
+  COUNT(*) AS total_cves,
+  ROUND(AVG(CVSS_Score), 2) AS avg_cvss,
+  COUNTIF(Severity = 'CRITICAL') AS critical_count
+FROM `project.dataset.healthcare_cves`
+GROUP BY Keyword
+ORDER BY total_cves DESC;
+```
+
+**Results**
+
+| Keyword | Total CVEs | Avg CVSS | Critical |
+|---------|-----------|----------|---------|
+| hospital | 460 | 6.71 | 53 |
+| patient | 253 | 6.55 | 18 |
+| OpenEMR | 113 | 7.12 | 22 |
+| DICOM | 103 | 6.89 | 8 |
+| pharmacy | 92 | 6.34 | 5 |
