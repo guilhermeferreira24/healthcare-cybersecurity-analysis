@@ -388,7 +388,7 @@ DIVIDE(
 
 **Page 1 — Overview**
 
-
+![Overview](dashboard/overview.png)
 
 Key visuals: Gauge (Avg CVSS), KPI cards, CVEs by Severity (donut), CVEs by Keyword (bar), CVEs by Year (area chart)
 
@@ -396,7 +396,7 @@ Key visuals: Gauge (Avg CVSS), KPI cards, CVEs by Severity (donut), CVEs by Keyw
 
 **Page 2 — Risk Analysis**
 
-
+![Risk Analysis](dashboard/risk_analysis.png)
 
 Key visuals: Top 10 CWE Weaknesses, Avg CVSS by Keyword, Scatter (CVSS vs Days Unpatched), Matrix (Keyword × Severity)
 
@@ -404,7 +404,7 @@ Key visuals: Top 10 CWE Weaknesses, Avg CVSS by Keyword, Scatter (CVSS vs Days U
 
 **Page 3 — Attack Vectors**
 
-
+![Attack Vectors](dashboard/attack_vectors.png)
 
 Key visuals: Treemap (Attack Vector × Keyword), Stacked Bar (Attack Vector by Year), Donut (Attack Vector distribution), KPI card (Network Attack %)
 
@@ -412,7 +412,7 @@ Key visuals: Treemap (Attack Vector × Keyword), Stacked Bar (Attack Vector by Y
 
 **Page 4 — Timeline**
 
-
+![Timeline](dashboard/timeline.png)
 
 Key visuals: Line chart (CVEs by Year × Severity), Column chart (Avg CVSS by Year), KPI card (Peak Year CVEs)
 
