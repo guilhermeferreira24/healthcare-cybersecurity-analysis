@@ -396,7 +396,7 @@ Key visuals: Gauge (Avg CVSS), KPI cards, CVEs by Severity (donut), CVEs by Keyw
 
 **Page 2 — Risk Analysis**
 
-[![Risk Analysis](dashboard/risk_analysis.png)](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/main/risk_analysis.png.png?raw=true)
+![image alt](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/a32191513eeaa793003c32623bed3c8ac25d7c22/risk_analysis.png.png)
 
 Key visuals: Top 10 CWE Weaknesses, Avg CVSS by Keyword, Scatter (CVSS vs Days Unpatched), Matrix (Keyword × Severity)
 
@@ -404,7 +404,7 @@ Key visuals: Top 10 CWE Weaknesses, Avg CVSS by Keyword, Scatter (CVSS vs Days U
 
 **Page 3 — Attack Vectors**
 
-![Attack Vectors](dashboard/attack_vectors.png)
+![image alt](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/1ac50a1fa4ee1af37f223fcb2bcbb994c22f41ae/attack_vectors.png.png)
 
 Key visuals: Treemap (Attack Vector × Keyword), Stacked Bar (Attack Vector by Year), Donut (Attack Vector distribution), KPI card (Network Attack %)
 
@@ -412,7 +412,7 @@ Key visuals: Treemap (Attack Vector × Keyword), Stacked Bar (Attack Vector by Y
 
 **Page 4 — Timeline**
 
-![Timeline](dashboard/timeline.png)
+![image alt](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/1ac50a1fa4ee1af37f223fcb2bcbb994c22f41ae/timeline.png.png)
 
 Key visuals: Line chart (CVEs by Year × Severity), Column chart (Avg CVSS by Year), KPI card (Peak Year CVEs)
 
