@@ -63,6 +63,7 @@ The dataset contains real CVE records sourced from Kaggle, covering the period f
 | **EHR** | Electronic Health Record — digital version of a patient's medical history |
 | **DICOM** | Digital Imaging and Communications in Medicine — standard for medical imaging data (X-rays, MRIs) |
 | **NVD** | National Vulnerability Database — the US government repository where CVEs are published and scored |
+***
 
 ## Approach
 
