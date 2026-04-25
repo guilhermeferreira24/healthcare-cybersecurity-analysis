@@ -388,7 +388,7 @@ DIVIDE(
 
 **Page 1 — Overview**
 
-[![Overview](dashboard/overview.png)](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/main/overview.png.png?raw=true)
+![image alt](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/271cd349c7b3f7f160f4a64946f1bcb77b1727a5/overview.png.png)
 
 Key visuals: Gauge (Avg CVSS), KPI cards, CVEs by Severity (donut), CVEs by Keyword (bar), CVEs by Year (area chart)
 
