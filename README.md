@@ -388,7 +388,7 @@ DIVIDE(
 
 **Page 1 — Overview**
 
-![Overview](dashboard/overview.png)
+[![Overview](dashboard/overview.png)](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/main/overview.png.png?raw=true)
 
 Key visuals: Gauge (Avg CVSS), KPI cards, CVEs by Severity (donut), CVEs by Keyword (bar), CVEs by Year (area chart)
 
@@ -396,7 +396,7 @@ Key visuals: Gauge (Avg CVSS), KPI cards, CVEs by Severity (donut), CVEs by Keyw
 
 **Page 2 — Risk Analysis**
 
-![Risk Analysis](dashboard/risk_analysis.png)
+[![Risk Analysis](dashboard/risk_analysis.png)](https://github.com/guilhermeferreira24/healthcare-cybersecurity-analysis/blob/main/risk_analysis.png.png?raw=true)
 
 Key visuals: Top 10 CWE Weaknesses, Avg CVSS by Keyword, Scatter (CVSS vs Days Unpatched), Matrix (Keyword × Severity)
 
