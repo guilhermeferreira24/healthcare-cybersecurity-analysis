@@ -51,6 +51,18 @@ The dataset contains real CVE records sourced from Kaggle, covering the period f
 - **GitHub** — Version control and portfolio
 
 ***
+## Key Terms
+
+| Term | Description |
+|------|-------------|
+| **CVE** | Common Vulnerabilities and Exposures — a unique identifier assigned to a publicly known security vulnerability |
+| **CVSS Score** | Common Vulnerability Scoring System — a numeric score from 0 to 10 that measures the severity of a vulnerability |
+| **CWE** | Common Weakness Enumeration — a category system that classifies the root cause of a vulnerability (e.g. CWE-89 = SQL Injection) |
+| **Severity** | Classification derived from the CVSS Score: LOW (0–3.9), MEDIUM (4–6.9), HIGH (7–8.9), CRITICAL (9–10) |
+| **Attack Vector** | How a vulnerability can be exploited — NETWORK (remotely), LOCAL (requires local access), PHYSICAL (requires physical device access) |
+| **EHR** | Electronic Health Record — digital version of a patient's medical history |
+| **DICOM** | Digital Imaging and Communications in Medicine — standard for medical imaging data (X-rays, MRIs) |
+| **NVD** | National Vulnerability Database — the US government repository where CVEs are published and scored |
 
 ## Approach
 
@@ -445,5 +457,6 @@ Key visuals: Line chart (CVEs by Year × Severity), Column chart (Avg CVSS by Ye
 ## Source
 
 Dataset: [Kaggle — Healthcare Cybersecurity Vulnerabilities](https://www.kaggle.com)  
+Python: Colab
 SQL Environment: Google BigQuery Sandbox  
 BI Tool: Microsoft Power BI Desktop
