@@ -1,0 +1,17 @@
+from google.colab import files
+import pandas as pd
+import io
+
+uploaded = files.upload()
+
+df = pd.read_csv(io.BytesIO(list(uploaded.values())[0]), on_bad_lines='skip')
+print(df.shape)
+print(df.columns.tolist())
+
+df['Description'] = df['Description'].astype(str).str.replace('\n', ' ', regex=False)
+df['Description'] = df['Description'].str.replace('\r', ' ', regex=False)
+df['Description'] = df['Description'].str.replace('"', "'", regex=False)
+
+df.to_csv('healthcare_clean.csv', index=False, quoting=1)
+
+files.download('healthcare_clean.csv')
