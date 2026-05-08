@@ -1,5 +1,10 @@
 # Healthcare Cybersecurity Vulnerabilities Analysis
 
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![BigQuery](https://img.shields.io/badge/Google-BigQuery-orange)
+![PowerBI](https://img.shields.io/badge/Power-BI-yellow)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+
 ## Overview
 
 This project analyzes real CVE (Common Vulnerabilities and Exposures) records from hospitals, medical devices, EHR systems and other healthcare infrastructure. The goal was to identify risk patterns, attack vectors, and vulnerability trends across the healthcare sector using Python, SQL (BigQuery) and Power BI.
