@@ -1,6 +1,6 @@
 # Healthcare Cybersecurity Vulnerabilities Analysis
 
-![Banner](https://raw.githubusercontent.com/guilhermeferreira24/healthcare-cybersecurity-analysis/main/banner.png)
+![Banner](banner.png)
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![BigQuery](https://img.shields.io/badge/Google-BigQuery-orange)
